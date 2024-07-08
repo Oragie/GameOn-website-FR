@@ -334,10 +334,17 @@ input[data-error]::after {
   border: 0;
 }
 
-/* ** Error form when submit **
+/* ** Error form when submit **/
 #error {
-  box-shadow: rgba(93, 50, 50, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(64, 10, 10, 0.35) 0px -2px 6px 0px inset;
-} */
+  display: flex;
+  align-items: end;
+  font-size: 0.8rem;
+  color: red;
+}
+
+.input_error{
+  box-shadow: -2px 2px 33px 4px rgba(255,0,0,0.67);
+}
 
 /* custom select styles */
 .custom-select {
