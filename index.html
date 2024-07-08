@@ -3,17 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
+    <title>Réservation</title>
+    <meta name="description">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-    <link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -112,12 +108,12 @@
                     </div>
 
                     <div class="form_data">
-                        <input class="checkbox-input" type="checkbox" id="checkbox1" />
-                        <label class="checkbox2-label" for="checkbox1">
+                        <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
+                        <label class="checkbox2-label" for="checkbox1" required>
                             <span class="checkbox-icon" tabindex="0"></span>
                             J'ai lu et accepté les conditions d'utilisation.
                         </label>
-                        <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                        <input class="checkbox-input" type="checkbox" id="checkbox2" checked />
                         <label class="checkbox2-label" for="checkbox2">
                             <span class="checkbox-icon" tabindex="0"></span>
                             Je souhaite être prévenu des prochains évènements.
@@ -138,7 +134,7 @@
     <footer>
         <p class="copyrights">Copyright 2014 - 2022, GameOn Inc.</p>
     </footer>
-    <script src="./javascript/app.js" type="module"></script>
+    <script src="./javascript/modal.js" defer type="module"></script>
 </body>
 
 </html>
