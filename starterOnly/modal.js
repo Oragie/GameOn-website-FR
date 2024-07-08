@@ -31,48 +31,18 @@ closeBtn.addEventListener("click", () => {
   
 // recupération données formulaire
 let balisePrenom = document.getElementById("first")
-balisePrenom.addEventListener("change", ()=> {
-  
-  console.log(balisePrenom.value)
-})
-
 
 let baliseNom = document.getElementById("last")
-baliseNom.addEventListener("change", ()=> {
-  console.log(baliseNom.value)
-})
 
 let baliseEmail = document.getElementById("email")
-baliseEmail.addEventListener("change", ()=> {
-  console.log(baliseEmail.value)
-})
-
 
 let baliseBirthdate = document.getElementById("birthdate")
-baliseBirthdate.addEventListener("change", ()=> {
-  console.log(baliseBirthdate.value)
-})
-
 
 let baliseQuantity = document.getElementById("quantity")
-baliseQuantity.addEventListener("change", ()=> {
-  console.log(baliseQuantity.value)
-})
-
 
 let baliseCGUCheck = document.getElementById("checkbox1")
-console.log("CGU check = ", baliseCGUCheck.checked)
-baliseCGUCheck.addEventListener("change", ()=> {
-  console.log("CGU check = ", baliseCGUCheck.checked)
-})
-
 
 let baliseNewsLetter = document.getElementById("checkbox2")
-console.log("Newsletter check = ", baliseNewsLetter.checked)
-baliseNewsLetter.addEventListener("change", ()=> {
-  console.log("Newsletter check = ", baliseNewsLetter.checked)
-})
-
 
 let baliseListeLocationBtn = document.querySelectorAll('input[name="citylocation"]')
 let citylocation = ""
@@ -86,16 +56,6 @@ for (let i=0; i<baliseListeLocationBtn.length; i++) {
 }
 
 
-// Message for wrong input
-const message = {
-  balisePrenomOk: 'Minimum 2 caractères. Les chiffres et caractères spéciaux ne sont pas autorisés',
-  baliseNameOk: 'Minimum 2 caractères. Les chiffres et caractères spéciaux ne sont pas autorisés',
-  baliseEmailOk: 'Veuillez renseigner une adresse mail valide.',
-  baliseBirthdateOk: 'Vous devez avoir plus de 18 ans pour participer',
-  baliseQuantityOk: 'Veuillez saisir une valeur numérique',
-  baliseListeLocationBtnOk: 'Veuillez sélectionner une ville',
-  baliseCGUCheckOk: `Vous devez accepter les conditions d'utilisation`,
-};
 
 
 
@@ -150,60 +110,60 @@ const message = {
 const form = document.querySelector('form');
 
 
-/*function to check empty field */
-function checkFields(balise) {
-  if (!balise.value) {
-    let error = document.getElementById('error')
-    balise.classList.add('input_error')
-    error.innerHTML="** Champ Obligatoire **"
-    console.log(balise.classList)
-  } else {
-    balise.classList.remove("input_error")
-  }
-}
+// /*function to check empty field */
+// function checkFields(balise) {
+//   if (!balise.value) {
+//     let error = document.getElementById('error')
+//     balise.classList.add('input_error')
+//     error.innerHTML="** Champ Obligatoire **"
+//     console.log(balise.classList)
+//   } else {
+//     balise.classList.remove("input_error")
+//   }
+// }
 
-// function to check correct expression for mail
-function checkEmail(balise) {
-  let emailRegExp = new RegExp("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")
-  if (emailRegExp.test(balise.value)) {
-    balise.classList.remove("input_error")
-    } else {
-      balise.classList.add('input_error')
-      error="balise+Ok"
-    }
-}
+// // function to check correct expression for mail
+// function checkEmail(balise) {
+//   let emailRegExp = new RegExp("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")
+//   if (emailRegExp.test(balise.value)) {
+//     balise.classList.remove("input_error")
+//     } else {
+//       balise.classList.add('input_error')
+//       error="balise+Ok"
+//     }
+// }
 
 
 
-// function to check correct expression for mail
-function checkAlpha(balise) {
-  let alphaRegExp = new RegExp("\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+")
-  if (alphaRegExp.test(balise.value)) {
-    balise.classList.remove("input_error")
-    } else {
-      balise.classList.add('input_error')
-      error="balise+Ok"
-    }
-}
+// // function to check correct expression for mail
+// function checkAlpha(balise) {
+//   let alphaRegExp = new RegExp("\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+")
+//   if (alphaRegExp.test(balise.value)) {
+//     balise.classList.remove("input_error")
+//     } else {
+//       balise.classList.add('input_error')
+//       error="balise+Ok"
+//     }
+// }
 
-// Quand on submit
-form.addEventListener("submit", (event) => {
-  checkAlpha(balisePrenom)
-  checkFields(balisePrenom)
-  // On empêche le comportement par défaut
-  event.preventDefault();
-});
+// // Quand on submit
+// form.addEventListener("submit", (event) => {
+//   checkAlpha(balisePrenom)
+//   checkFields(balisePrenom)
+//   // On empêche le comportement par défaut
+//   event.preventDefault();
+// });
 
-form.addEventListener("submit", (event) => {
-  // On empêche le comportement par défaut
-  event.preventDefault();
-  checkFields(baliseNom)
-});
+// form.addEventListener("submit", (event) => {
+//   // On empêche le comportement par défaut
+//   event.preventDefault();
+//   checkFields(baliseNom)
+// });
 
-/*au changement tant que l'email n'est pas bien écrit*/
-baliseEmail.addEventListener("change", () => {
-  checkEmail(baliseEmail)
-})
+// /*au changement tant que l'email n'est pas bien écrit*/
+// baliseEmail.addEventListener("change", () => {
+//   checkEmail(baliseEmail)
+// })
 
 // form.addEventListener("submit", (event) => {
 //   // On empêche le comportement par défaut
@@ -223,8 +183,60 @@ baliseEmail.addEventListener("change", () => {
 //   checkFields(baliseListeLocationBtn)
 // });
 
+// // Fonction pour afficher un message d'erreur et ajouter la classe d'erreur
+// function showError(element, message) {
+//   element.classList.add('input_error');
+//   let errorElement = element.nextElementSibling;
+//   if (errorElement && errorElement.classList.contains('error')) {
+//     errorElement.textContent = message;
+//   }
+// }
+
+// Message for wrong input
+const message = {
+  balisePrenomOk: 'Minimum 2 caractères. Les chiffres et caractères spéciaux ne sont pas autorisés',
+  baliseNameOk: 'Minimum 2 caractères. Les chiffres et caractères spéciaux ne sont pas autorisés',
+  baliseEmailOk: 'Veuillez renseigner une adresse mail valide.',
+  baliseBirthdateOk: 'Vous devez avoir plus de 18 ans pour participer',
+  baliseQuantityOk: 'Veuillez saisir une valeur numérique',
+  baliseListeLocationBtnOk: 'Veuillez sélectionner une ville',
+  baliseCGUCheckOk: `Vous devez accepter les conditions d'utilisation`,
+};
+
+// Fonction pour ajouter un message d'erreur à un élément avec la classe error
+function addErrorMessage(spanElement, message) {
+  spanElement.textContent = message;  // Utilise textContent pour ajouter du texte
+}
+
+// Exemple d'utilisation
+const errorSpan = document.querySelector('.error');  // Sélectionne le premier élément avec la classe error
+
+
+
+function checkFields(balise) {
+  let isValid = true;
+
+  balise.classList.add ("input_error")
+
+  const alphaRegExp = new RegExp("\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+")
+  if (!balisePrenom.value || !balisePrenom.test(balise.value)) {
+    addErrorMessage(errorSpan, "Le champ Prénom a un minimum de 2 caractères / n'est pas vide.")
+    isValid = false;
+  } else{
+    balise.classList.remove ("input_error")
+  }
+  return isValid;
+}
+
+// Quand on submit
 form.addEventListener("submit", (event) => {
   // On empêche le comportement par défaut
   event.preventDefault();
-  checkFields(baliseCGUCheck)
+
+  if (checkFields()) {
+    console.log("Formulaire envoyé avec succès");
+    // Ajouter ici le code pour envoyer le formulaire
+  } else {
+    console.log("Le formulaire contient des erreurs");
+  }
 });
