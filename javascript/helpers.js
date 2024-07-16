@@ -42,10 +42,8 @@ export function checkIfCitySelected(cities, message) {
 }
 
 //Check if user enter birthdate
-export function checkBirthDate(element, message) {
-  let birthDate = document.getElementById("birthdate").value;
-
-  if (!birthDate) {
+export function checkIfBirthdateValue(element, message) {
+  if (!birthdate.value) {
     setErrorMessage(element, message);
     return false;
   }

@@ -1,8 +1,8 @@
 import {
   checkInputValue,
+  checkIfBirthdateValue,
   checkIfConditionsAccepted,
   checkIfCitySelected,
-  checkBirthDate,
 } from "./helpers.js";
 
 // Modal Navigation
@@ -14,13 +14,6 @@ const btnNav = document.querySelector("#btn_hamb");
 
 // Form
 const form = document.querySelector("form");
-const firstnameField = document.querySelector("#first");
-const lastnameField = document.querySelector("#last");
-const birthdateField = document.querySelector("#birthdate");
-const emailField = document.querySelector("#email");
-const quantityField = document.querySelector("#quantity");
-const conditionsCheckbox = document.querySelector("#checkbox1");
-const allBtnRadio = document.querySelectorAll("input[name='location']");
 
 // Toggle navbar
 btnNav.addEventListener("click", () =>
@@ -38,12 +31,12 @@ modalClose.addEventListener(
 
 // Message error
 const message = {
-  name: "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
-  email: "Veuillez entrer une adresse mail valide.",
-  birthdate: "Vous devez entrer votre date de naissance.",
-  quantity: "Veuillez renseigner un nombre",
-  city: "Vous devez choisir une option.",
-  conditions: `Vous devez vérifier que vous acceptez les termes et conditions.`,
+  name: "Saisir minimum 2 caractères, ne peut être vide.",
+  email: "Veuillez entrer une adresse mail valide, ne peut être vide.",
+  birthdate: "Veuillez entrer votre date de naissance.",
+  quantity: "Veuillez renseigner un nombre.",
+  city: "Veuillez sélectionner une ville.",
+  conditions: `Vous devez accepter les conditions général d'utilisation.`,
 };
 
 // Regex
@@ -52,9 +45,23 @@ const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const regexQuantity = /^([0-9]+)$/;
 
 // Validate form
-function validate(event) {
+function validate(event, type) {
   event.preventDefault();
-
+  if (!type)
+    throw new Error("Type is required, choose between 'submit' or 'input'");
+  let elements = null;
+  if (type === "submit") {
+    elements = event.target.elements;
+  } else {
+    elements = event.target.form.elements;
+  }
+  const firstnameField = elements["first"];
+  const lastnameField = elements["last"];
+  const birthdateField = elements["birthdate"];
+  const emailField = elements["email"];
+  const quantityField = elements["quantity"];
+  const conditionsCheckbox = elements["checkbox1"];
+  const allBtnRadio = elements["location"];
   // Check if all conditions are valid
   const isConditionsAccepted = checkIfConditionsAccepted(
     conditionsCheckbox,
@@ -66,9 +73,10 @@ function validate(event) {
     quantityField,
     message.quantity
   );
-
-  const isBirthDateValid = checkBirthDate(birthdateField, message.birthdate);
-
+  const isBirthdateValid = checkIfBirthdateValue(
+    birthdateField,
+    message.birthdate
+  );
   const isEmailValid = checkInputValue(regexEmail, emailField, message.email);
   const isLastNameValid = checkInputValue(
     regexName,
@@ -83,10 +91,11 @@ function validate(event) {
 
   // If all conditions are valid
   if (
+    type === "submit" &&
     isConditionsAccepted &&
     isCitySelected &&
     isQuantityValid &&
-    isBirthDateValid &&
+    isBirthdateValid &&
     isEmailValid &&
     isLastNameValid &&
     isFirstNameValid
@@ -97,31 +106,8 @@ function validate(event) {
   }
 }
 
-function checkValidation(event) {
-  const formInputs = new FormData(event.target.form);
-  const formData = {};
-  for (let [name, value] of formInputs.entries()) {
-    formData[name] = {
-      value: value,
-      element: event.target.form.elements[name],
-    };
-  }
-  console.log("formData CHECK", formData);
-  // querySelect pour chaque key.
-  if (formData.cgu) {
-    checkIfConditionsAccepted(formData.cgu.element, message.conditions);
-  }
-  checkIfCitySelected(allBtnRadio, message.city);
-  checkInputValue(regexQuantity, quantityField, message.quantity);
-  checkBirthDate(birthdateField, message.birthdate);
-  checkInputValue(regexEmail, emailField, message.email);
-  checkInputValue(regexName, lastnameField, message.name);
-  checkInputValue(regexName, firstnameField, message.name);
-}
-
-// Send Form
-form.addEventListener("submit", (event) => validate(event));
-form.addEventListener("input", (event) => checkValidation(event));
+form.addEventListener("submit", (event) => validate(event, "submit"));
+form.addEventListener("input", (event) => validate(event, "input"));
 
 // Close Success Modal
 document
